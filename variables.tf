@@ -476,14 +476,15 @@ variable "cluster_autoscaler_image_tag" {
 
 variable "cluster_autoscaler_nodepools" {
   type = list(object({
-    name        = string
-    location    = string
-    type        = string
-    labels      = optional(map(string), {})
-    annotations = optional(map(string), {})
-    taints      = optional(list(string), [])
-    min         = optional(number, 0)
-    max         = number
+    name           = string
+    location       = string
+    type           = string
+    labels         = optional(map(string), {})
+    annotations    = optional(map(string), {})
+    taints         = optional(list(string), [])
+    min            = optional(number, 0)
+    max            = number
+    config_patches = optional(list(any), [])
   }))
   default     = []
   description = "Defines configuration settings for Autoscaler node pools within the cluster."
