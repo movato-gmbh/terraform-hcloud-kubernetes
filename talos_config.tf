@@ -605,7 +605,8 @@ data "talos_machine_configuration" "worker" {
 
   config_patches = concat(
     [yamlencode(local.worker_talos_config_patch[each.key])],
-    [for patch in var.worker_config_patches : yamlencode(patch)]
+    [for patch in var.worker_config_patches : yamlencode(patch)],
+    [for patch in local.worker_nodepools_map[each.value.labels.nodepool].config_patches : yamlencode(patch)]
   )
 }
 
